@@ -1,0 +1,23 @@
+body{
+    background-color:rgb(48, 48, 48);
+}
+
+.navigation-panel{
+    background-color:rgb(29, 29, 29);
+    height: 40px;
+    width:100%;
+    display:flex;
+    margin-top: -10px;
+}
+
+#search-p{
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+#msg-p{
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}

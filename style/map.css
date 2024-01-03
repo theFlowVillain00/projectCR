@@ -1,0 +1,42 @@
+body{
+    background-color:rgb(25, 74, 138);
+}
+
+/* Stile predefinito dell'area */
+
+/* Stile durante l'hover sull'area */
+path:hover {
+    fill: #12549e; /* Colore di riempimento durante l'hover */
+}
+
+.info-box {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: none;
+}
+/* Mostra il div con le informazioni durante l'hover */
+path:hover , .info-box {
+    display: block;
+}
+
+
+#zoom-pan-container {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    cursor: grab; /* Cambia il cursore quando il mouse è sopra il contenitore */
+  }
+
+  /* Stile per la scala e posizione di visualizzazione che verranno modificati dinamicamente */
+  #zoom-pan-content {
+    transition: transform 0.2s ease;
+    transform-origin: 0 0;
+    cursor: grab; /* Cambia il cursore quando il mouse è sopra il contenuto */
+  }
+
+  /* Aggiunge uno stile di grab durante il trascinamento */
+  #zoom-pan-content.grabbing {
+    cursor: grabbing;
+  }
