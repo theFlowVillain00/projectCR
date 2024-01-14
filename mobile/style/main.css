@@ -1,13 +1,13 @@
 body{
-    background-color:rgb(48, 48, 48);
+    background-color:#393939;
 }
 
 .navigation-panel{
-    background-color:rgb(29, 29, 29);
+    background-color:#292929;
+    position: fixed;
     height: 40px;
     width:100%;
     display:flex;
-    margin-top: -10px;
 }
 
 #search-p{

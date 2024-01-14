@@ -1,12 +1,26 @@
 body{
-    background-color:rgb(25, 74, 138);
+    background-color:rgb(69, 133, 85);
+    width: auto;
+    height: auto;
+    overflow-x: hidden;
 }
 
 /* Stile predefinito dell'area */
 
 /* Stile durante l'hover sull'area */
 path:hover {
-    fill: #12549e; /* Colore di riempimento durante l'hover */
+    fill: #d11414; /* Colore di riempimento durante l'hover */
+}
+
+path{
+  fill:aqua;
+}
+
+svg{
+  width: 500px;
+  height: 500px;
+  position:relative;
+  left:600px;
 }
 
 .info-box {
@@ -16,9 +30,35 @@ path:hover {
     border: 1px solid #ccc;
     display: none;
 }
+
+.old-info-box{
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: none;
+  right:10px;
+}
 /* Mostra il div con le informazioni durante l'hover */
-path:hover , .info-box {
+path:hover , .info-box, .old-info-box {
     display: block;
+}
+
+#popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #000;
+  z-index: 999;
+}
+
+path{
+  stroke:black;
+  stroke-width: 2.5px;
 }
 
 
