@@ -1,0 +1,18 @@
+{
+    "stato": {
+      "nome": "Repubblica Italiana",
+      "colore": "rosso",
+      "abitanti": 160,
+      "forma_di_governo": "Repubblica presidenziale",
+      "capitale": "Roma",
+      "lingua": "Italiano",
+      "moneta": "Euro",
+      "ministro": {
+        "nome": "Mario",
+        "cognome": "Rossi",
+        "titolo": "Primo Ministro",
+        "partito": "Partito Democratico"
+      }
+    }
+  }
+  

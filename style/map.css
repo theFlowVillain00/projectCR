@@ -20,7 +20,7 @@ svg{
   width: 500px;
   height: 500px;
   position:relative;
-  left:600px;
+  margin-left:200px;
 }
 
 .info-box {
