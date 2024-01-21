@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(){
     
     //Variabili globali
+    
 
 
     //Oggetti
@@ -36,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
-        
     }
 
     // Classe figlia GoldMine
@@ -45,10 +45,8 @@ document.addEventListener('DOMContentLoaded', function(){
             super(nome, lvl, exp, wage);
             this.goldProperty = goldProperty;
         }
-
-
     }
-
+    
     // Classe figlia OilMine
     class OilMine extends Miniera {
         constructor(nome, lvl, exp, wage, oilProperty) {
@@ -65,18 +63,11 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-    // Esempio di utilizzo delle classi
-    let goldMine = new GoldMine("GoldMine1", 3, 100, "HighWage", "GoldProperty");
-    let oilMine = new OilMine("OilMine1", 4, 150, "MediumWage", "OilProperty");
-    let woodMine = new WoodMine("WoodMine1", 2, 50, "LowWage", "WoodProperty");
 
-    console.table(goldMine);
-    console.table(oilMine);
-    console.table(woodMine);
     
     
     
-
+    //Stipendio calcolato in base => Livello fabbrica * 
 
     //INDEX COLONNA 0 => NOME, 1 => LIVELLO, 2 => XP FABBRICA
     let miniere = 
@@ -107,12 +98,83 @@ document.addEventListener('DOMContentLoaded', function(){
     console.table(miniere);
     console.table(fattorie);
 
+    
+    function inserisciFabbrichePrivate(fabbrica) {
+        // Crea un div per contenere le informazioni della fabbrica
+        let divFabbrica = document.createElement("div");
+    
+        // Crea paragrafi per ogni informazione della fabbrica
+        let paragrafoNome = document.createElement("p");
+        paragrafoNome.textContent = "Nome: " + fabbrica.nome;
+    
+        let paragrafoLivello = document.createElement("p");
+        paragrafoLivello.textContent = "Livello: " + fabbrica.lvl;
+    
+        let paragrafoExp = document.createElement("p");
+        paragrafoExp.textContent = "Esperienza: " + fabbrica.exp;
+    
+        let paragrafoSalario = document.createElement("p");
+        paragrafoSalario.textContent = "Salario: " + fabbrica.wage;
+    
+        let paragrafoGoldProperty = document.createElement("p");
+        paragrafoGoldProperty.textContent = "Proprietà Gold: " + fabbrica.goldProperty;
+    
+        // Aggiungi i paragrafi al divFabbrica
+        divFabbrica.appendChild(paragrafoNome);
+        divFabbrica.appendChild(paragrafoLivello);
+        divFabbrica.appendChild(paragrafoExp);
+        divFabbrica.appendChild(paragrafoSalario);
+        divFabbrica.appendChild(paragrafoGoldProperty);
+    
+        // Aggiungi il divFabbrica al documento
+        document.body.appendChild(divFabbrica);
+    }
+    
 
-    /*
-        Questa è la funzione per visualizzare a schermo i tipi di fabbriche, ed i bottoni
-        @param ---
-        @return ---
-        @version 1.0
+    /**
+     * 
+     * @param {*} nome 
+     * @param {*} livello 
+     * @param {*} esperienza 
+     * @param {*} salario 
+     * @param {*} proprietà 
+     * @returns 
+     */
+    function creaFabbricaGold(nome, livello, esperienza, salario, proprietà){    
+        livello = 2;
+        esperienza = 0;
+        let nuovaFabbrica = nome;
+        if(nome.length > 0){
+            nuovaFabbrica = new GoldMine(nome, livello, esperienza, salario, proprietà);
+            console.log(nuovaFabbrica);   
+        }
+
+        inserisciFabbrichePrivate(nuovaFabbrica);
+
+        return nuovaFabbrica;
+    }
+
+    
+    document.getElementById('ottieniInput').addEventListener('click', ottieniInput);
+    /**
+     * Questa funzione server ad ottenere i campi di input per la  nuova fabbrica
+     * 
+     * 
+     */
+    function ottieniInput() {
+        let nomeMiniera = document.getElementById("name").value;
+        let ramo = document.getElementById("miniere").value;
+        alert("Nome: " + nomeMiniera + "\nRamo: " + ramo);
+        // Chiamo la funzione di instanziamento della Fabbrica
+        creaFabbricaGold("BeuNack", 2, 0, 10, nomeMiniera);
+    }
+    
+
+    /**
+     * Questa è la funzione per visualizzare a schermo i tipi di fabbriche, ed i bottoni
+     * @param ---
+     * @return ---
+     * @version 1.0
     */
     function inserisciFabbriche() {
         for (let i = 0; i < miniere.length; i++) {
@@ -166,15 +228,28 @@ document.addEventListener('DOMContentLoaded', function(){
             });
 
             document.body.appendChild(coppiaElemento);
-        }        
+        }
+        popolaTapparella();        
     }
 
-    /*
-        Questa è la funzione di lavoro
-        @param dipartimento il tipo di fabbrica su cui lavoro
-        @return --
-        @version 1.0
-    */
+    // Funzione per popolare la tapparella con i valori dell'array
+    function popolaTapparella() {
+        let tapparella = document.getElementById("miniere");
+
+        for (let i = 0; i < miniere.length; i++) {
+            let opzione = document.createElement("option");
+            opzione.text = miniere[i][0];
+            tapparella.add(opzione);
+        }
+    }
+
+    /**
+     * Funzione di lavoro
+     * @param {*} index 
+     * @param {*} dipartimento 
+     * @param {*} livello 
+     * @param {*} exp 
+     */
     function lavora(index, dipartimento, livello, exp) {
         console.log("index: " + index + ", dipartimento: " + dipartimento + ", livello: " + 
         livello + ", exp: " + exp);
@@ -186,22 +261,21 @@ document.addEventListener('DOMContentLoaded', function(){
 
         //Aggiorno l'exp della fabbrica
         exp += 100;
-        dipartimento.push(['Oro',2]);
+        
         
     
         // Vado a dare l'esperienza alla fabbrica
         console.log("Hai cliccato su " + dipartimento + ", livello " + livello + ", exp " + exp);
     }
 
-    /*
-        Funzione per il calcolo dell'esperienza necessaria per il prossimo livello della fabbrica
-        @param livelloFabbrica è il livello della fabbrica 
-        @return l'esperienza necessaria per il prossimo livello
-        @version 1.0
-    */
-   function calcoloEsperienzaNecessaria(livelloFabbrica){
+    /**
+     * 
+     * @param {*} livelloFabbrica 
+     * @returns 
+     */
+    function calcoloEsperienzaNecessaria(livelloFabbrica){
         return (livelloFabbrica - 1) * Math.pow(livelloFabbrica, 2);
-   }
+    }
 
     let livelloFabbrica = 60; // Cambia questo valore con il livello attuale della fabbrica
     let esperienzaNecessaria = calcoloEsperienzaNecessaria(livelloFabbrica);
