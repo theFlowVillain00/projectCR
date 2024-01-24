@@ -1,25 +1,64 @@
 document.addEventListener('DOMContentLoaded', function(){
     
+    //C'HO DA FIXARE GLI ID CHE CREA QUANDO CREO LE ISTANZE DELLE FABBRICHE
+
+
+
     //Variabili globali
-    
+    let soldi = 0;
+    let counter = 0;
+    //Questi due contatori andranno messi in uno solo, poiché sono lo stesso numero
+    //Contatore che aumenta ogni volta che STAMPO A SCHERMO una fabbrica
+    let contatoreFabbrica;
+    //Contatore che aumento ogni volta che CREO una fabbrica
+    let identificativoFabbrica = 0;
 
 
     //Oggetti
+
+    /**
+     * 
+     */
+    class user {
+        /**
+         * 
+         * @param {*} nome 
+         * @param {*} forza 
+         * @param {*} istruzione 
+         * @param {*} resistenza 
+         */
+        constructor(nome, forza, istruzione, resistenza){
+            this.nome = nome || "user" + contaUser();
+        }
+    }
     
-    /*
-        Classe padre delle miniere
+   /**
+    * Classe padre delle miniere
+    * 
     */
     class Miniera {
-        constructor(nome, lvl, exp, wage) {
+        /**
+         * Costruttore di miniera
+         * @param {*} nome 
+         * @param {*} lvl 
+         * @param {*} exp 
+         * @param {*} wage 
+         */
+        constructor(nome, lvl, exp, wage, identificativo) {
             this.nome = nome || "";
             this.lvl = lvl || 2;
             this.exp = exp || 0;
             this.wage = wage || "";
+            this.identificativo = identificativo;
         }
 
+        /**
+         * Funzione per aumentare
+         * @param {*} exp 
+         */
         aumentaExp(exp){
             if(exp >= 0){
-                this.exp += exp;
+                this.exp = exp;
             }else{
                 console.log("Esperienza negativa");
             }
@@ -37,35 +76,79 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
+        getExp(){
+            return this.exp;
+        }
+
     }
 
     // Classe figlia GoldMine
     class GoldMine extends Miniera {
-        constructor(nome, lvl, exp, wage, goldProperty) {
-            super(nome, lvl, exp, wage);
+        constructor(nome, lvl, exp, wage, goldProperty, identificativo) {
+            super(nome, lvl, exp, wage, identificativo);
             this.goldProperty = goldProperty;
         }
     }
     
     // Classe figlia OilMine
     class OilMine extends Miniera {
-        constructor(nome, lvl, exp, wage, oilProperty) {
-            super(nome, lvl, exp, wage);
+        constructor(nome, lvl, exp, wage, oilProperty, identificativo) {
+            super(nome, lvl, exp, wage, identificativo);
             this.oilProperty = oilProperty;
         }
     }
 
     // Classe figlia WoodMine
     class WoodMine extends Miniera {
-        constructor(nome, lvl, exp, wage, woodProperty) {
-            super(nome, lvl, exp, wage);
+        constructor(nome, lvl, exp, wage, woodProperty, identificativo) {
+            super(nome, lvl, exp, wage, identificativo);
             this.woodProperty = woodProperty;
         }
     }
 
+    /**
+     * Classe padre delle farm
+     * 
+     */
+    class farm{
+        /**
+         * 
+         * @param {*} nome 
+         * @param {*} lvl 
+         * @param {*} exp 
+         * @param {*} wage 
+         */
+        constructor(nome, lvl, exp, wage) {
+            this.nome = nome || "";
+            this.lvl = lvl || 2;
+            this.exp = exp || 0;
+            this.wage = wage || "";
+        }
 
-    
-    
+        aumentaExp(exp){
+            if(exp > 0){
+                this.exp += exp;
+            }else{
+                console.log("Esperienza negativa");
+            }
+        }
+
+        aumentaLivello(){
+            this.lvl +=1;
+        }
+
+        setWage(wage){
+            if(wage >= 1000){
+                this.wage = wage;
+            }else{
+                console.log("Salario troppo basso");
+            }
+        }
+    }
+
+
+
+
     
     //Stipendio calcolato in base => Livello fabbrica * 
 
@@ -73,14 +156,9 @@ document.addEventListener('DOMContentLoaded', function(){
     let miniere = 
     [
         ["Oro",       2, 0],
-        ["Carbone",   2, 0],
-        ["Ferro",     2, 0],
-        ["Rame",      2, 0],
-        ["Alluminio", 2, 0],
-        ["Zinco",     2, 0],
-        ["Nichel",    2, 0],
-        ["Piombo",    2, 0],
-        ["Uranio",    2, 0]
+        ["Oil",       2, 0],
+        ["Wood",      2, 0],
+        
     ];
 
     let fattorie =
@@ -93,42 +171,74 @@ document.addEventListener('DOMContentLoaded', function(){
        [ "Polli",     2, 0]
     ];
     
-    let soldi = 0;
 
     console.table(miniere);
     console.table(fattorie);
 
-    
+    /**FUNZIONE CHE SERVE PER ANDARE A INSERIRE LA FABBRICA SULLO SCHERMO UNA VOLTA CREATA
+     * 
+     * @param {*} fabbrica 
+     */
     function inserisciFabbrichePrivate(fabbrica) {
+        //L'identificatore fabbrica (il numero della fabbrica)
+        contatoreFabbrica = counter;
         // Crea un div per contenere le informazioni della fabbrica
         let divFabbrica = document.createElement("div");
     
-        // Crea paragrafi per ogni informazione della fabbrica
-        let paragrafoNome = document.createElement("p");
-        paragrafoNome.textContent = "Nome: " + fabbrica.nome;
+        // Utilizza la riflessione per ottenere tutte le proprietà dell'oggetto
+        for (let prop in fabbrica) {
+            if (fabbrica.hasOwnProperty(prop) && typeof fabbrica[prop] !== 'function') {
+                // Ignora i metodi e mostra solo le proprietà
+                let paragrafo = document.createElement("p");
     
-        let paragrafoLivello = document.createElement("p");
-        paragrafoLivello.textContent = "Livello: " + fabbrica.lvl;
+                // Assegna un id unico a ciascun paragrafo basato sul nome della proprietà e il contatore
+                let paragrafoId = prop + counter;
+                paragrafo.id = paragrafoId;
     
-        let paragrafoExp = document.createElement("p");
-        paragrafoExp.textContent = "Esperienza: " + fabbrica.exp;
+                paragrafo.textContent = prop + ": " + fabbrica[prop];
     
-        let paragrafoSalario = document.createElement("p");
-        paragrafoSalario.textContent = "Salario: " + fabbrica.wage;
+                // Aggiungi il pulsante "Lavora" solo per la proprietà 'nome'
+                if (prop === 'nome') {
+                    let bottoneFabbrica = document.createElement("button");
+                    bottoneFabbrica.value = fabbrica[prop];
+                    bottoneFabbrica.textContent = "Lavora";
+                    bottoneFabbrica.style.display = "inline-block";
     
-        let paragrafoGoldProperty = document.createElement("p");
-        paragrafoGoldProperty.textContent = "Proprietà Gold: " + fabbrica.goldProperty;
+                    // Assegna un id unico al pulsante basato sull'id del paragrafo
+                    let bottoneId = "bottone_" + paragrafoId;
+                    bottoneFabbrica.id = bottoneId;
     
-        // Aggiungi i paragrafi al divFabbrica
-        divFabbrica.appendChild(paragrafoNome);
-        divFabbrica.appendChild(paragrafoLivello);
-        divFabbrica.appendChild(paragrafoExp);
-        divFabbrica.appendChild(paragrafoSalario);
-        divFabbrica.appendChild(paragrafoGoldProperty);
+                    // Aggiungi l'evento click per il pulsante "Lavora"
+                    bottoneFabbrica.addEventListener("click", function () {
+                        // Lavora prendendo in considerazione le proprietà specifiche
+                        lavora(fabbrica);
+                    });
+    
+                    // Aggiungi il pulsante al paragrafo
+                    paragrafo.appendChild(bottoneFabbrica);
+                }
+    
+                // Aggiungi il paragrafo al divFabbrica
+                divFabbrica.appendChild(paragrafo);
+            }
+        }
+
+        // Incrementa il contatore per la prossima iterazione
+        counter++;
     
         // Aggiungi il divFabbrica al documento
         document.body.appendChild(divFabbrica);
     }
+    
+
+
+    function creazioneContatoreIdentificativoFabbrica(){
+        const identificatore = identificativoFabbrica;
+        identificativoFabbrica++;
+        return identificatore;
+    }
+    
+    
     
 
     /**
@@ -138,15 +248,29 @@ document.addEventListener('DOMContentLoaded', function(){
      * @param {*} esperienza 
      * @param {*} salario 
      * @param {*} proprietà 
+     * @param {*} contatoreIdentificativo
      * @returns 
      */
-    function creaFabbricaGold(nome, livello, esperienza, salario, proprietà){    
+    function creaFabbrica(nome, livello, esperienza, salario, proprietà,ramo){    
         livello = 2;
         esperienza = 0;
         let nuovaFabbrica = nome;
+        console.log(ramo);
         if(nome.length > 0){
-            nuovaFabbrica = new GoldMine(nome, livello, esperienza, salario, proprietà);
-            console.log(nuovaFabbrica);   
+            let identificativo = creazioneContatoreIdentificativoFabbrica();
+            console.log(identificativo);
+            if(ramo == "Oro"){
+                nuovaFabbrica = new GoldMine(nome, livello, esperienza, salario, proprietà, identificativo);
+                console.log(nuovaFabbrica)
+            }
+            if(ramo == "Oil"){
+                nuovaFabbrica = new OilMine(nome, livello, esperienza, salario, proprietà, identificativo);
+                console.log(nuovaFabbrica);
+            }
+            if(ramo == "Wood"){
+                nuovaFabbrica = new WoodMine(nome, livello, esperienza, salario, proprietà, identificativo);
+                console.log(nuovaFabbrica);
+            }  
         }
 
         inserisciFabbrichePrivate(nuovaFabbrica);
@@ -166,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function(){
         let ramo = document.getElementById("miniere").value;
         alert("Nome: " + nomeMiniera + "\nRamo: " + ramo);
         // Chiamo la funzione di instanziamento della Fabbrica
-        creaFabbricaGold("BeuNack", 2, 0, 10, nomeMiniera);
+        creaFabbrica("BeuNack", 2, 0, 10, nomeMiniera, ramo);
     }
     
 
@@ -228,9 +352,9 @@ document.addEventListener('DOMContentLoaded', function(){
             });
 
             document.body.appendChild(coppiaElemento);
-        }
-        popolaTapparella();        
+        }        
     }
+
 
     // Funzione per popolare la tapparella con i valori dell'array
     function popolaTapparella() {
@@ -244,29 +368,36 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     /**
-     * Funzione di lavoro
-     * @param {*} index 
-     * @param {*} dipartimento 
-     * @param {*} livello 
-     * @param {*} exp 
+     * 
+     * @param {*} fabbrica 
+     * @version 1.1
      */
-    function lavora(index, dipartimento, livello, exp) {
-        console.log("index: " + index + ", dipartimento: " + dipartimento + ", livello: " + 
-        livello + ", exp: " + exp);
-        //Aggiungi una quantità specifica di soldi
-        soldi += 10;
-    
+    function lavora(fabbrica) {
+
+        console.log(fabbrica);
+
+        //Aggiorno l'esperienza
+        let exp = fabbrica.getExp() + 10;
+        console.log(exp); 
+        fabbrica.aumentaExp(exp);
+
+        let e = "exp" + fabbrica.identificativo;
+        document.getElementById(e).textContent = "exp: " + fabbrica.exp;
+
+        //Aggiorno il livello della fabbrica
+        if(fabbrica.exp > calcoloEsperienzaNecessaria(fabbrica.lvl)){
+            fabbrica.lvl += 1;
+            let l = "lvl" + fabbrica.identificativo;
+            document.getElementById(l).textContent = "lvl: " + fabbrica.lvl;
+        }
+
+        
+
+        soldi += fabbrica.wage;    
         //Aggiorna il testo all'interno del paragrafo
         document.getElementById("soldiValore").textContent = soldi;
-
-        //Aggiorno l'exp della fabbrica
-        exp += 100;
-        
-        
-    
-        // Vado a dare l'esperienza alla fabbrica
-        console.log("Hai cliccato su " + dipartimento + ", livello " + livello + ", exp " + exp);
     }
+
 
     /**
      * 
@@ -275,6 +406,20 @@ document.addEventListener('DOMContentLoaded', function(){
      */
     function calcoloEsperienzaNecessaria(livelloFabbrica){
         return (livelloFabbrica - 1) * Math.pow(livelloFabbrica, 2);
+    }
+
+    /**
+     * Funzione prototipo che servirà per calcolare il guadagno dell'esperienza della fabbrica ad ogni chiamata della funzione lavoro
+     * 
+     * @param {*} fabbrica l'oggetto 
+     * @param {*} user l'utente
+     */
+    function calcoloGuadagnoEsperienza(fabbrica, user){
+
+    }
+
+    function contaUser(oldNumber){
+        return oldNumber+1;
     }
 
     let livelloFabbrica = 60; // Cambia questo valore con il livello attuale della fabbrica
@@ -287,8 +432,8 @@ document.addEventListener('DOMContentLoaded', function(){
     
     
     
-    inserisciFabbriche();
-
+    //inserisciFabbriche();
+    popolaTapparella();
 
     
 
