@@ -7,9 +7,6 @@ document.addEventListener('DOMContentLoaded', function(){
     //Variabili globali
     let soldi = 0;
     let counter = 0;
-    //Questi due contatori andranno messi in uno solo, poiché sono lo stesso numero
-    //Contatore che aumenta ogni volta che STAMPO A SCHERMO una fabbrica
-    let contatoreFabbrica;
     //Contatore che aumento ogni volta che CREO una fabbrica
     let identificativoFabbrica = 0;
 
@@ -181,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function(){
      */
     function inserisciFabbrichePrivate(fabbrica) {
         //L'identificatore fabbrica (il numero della fabbrica)
-        contatoreFabbrica = counter;
+        counter = counter;
         // Crea un div per contenere le informazioni della fabbrica
         let divFabbrica = document.createElement("div");
     

@@ -1,5 +1,3 @@
-
-
 <?php
 
     function controllaLogin($utenti){
@@ -22,11 +20,17 @@
                     
                     return true;
                 }
+
             }
         }else{
             return false;
         }
 
+    }
+
+    function registrati(){
+
+        
     }
 
     function controllaSessione(){
