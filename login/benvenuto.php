@@ -17,7 +17,11 @@
 
         }else{
         
+<<<<<<< HEAD
             echo "<p>Benvenuto, " . $_SESSION["utente"]["username"] . "!</p>";
+=======
+            echo "<p>Benvenuto, " . $_SESSION["username"] . "!</p>";
+>>>>>>> d46d4dd9dd89ad5f3255218dbf28bfb9d054d994
             echo "<form action='function/logout.php' method='post'>
                     <button type='submit'>Logout</button>
                  </form>";

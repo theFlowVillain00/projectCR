@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/log-reg.css">
+<<<<<<< HEAD
     <meta name="google-signin-client_id" content="578898538060-gcjikar14vkhigmscno3lkfttsudprhi.apps.googleusercontent.com">
+=======
+>>>>>>> d46d4dd9dd89ad5f3255218dbf28bfb9d054d994
     <title>Login</title>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
@@ -16,6 +19,7 @@
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
 
+<<<<<<< HEAD
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
 
@@ -69,5 +73,19 @@
         // Call the function to initialize Google Sign-In
         initGoogleSignIn();
     </script>
+=======
+    <div id="form-1">
+        <form action="function/check.php" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+>>>>>>> d46d4dd9dd89ad5f3255218dbf28bfb9d054d994
 </body>
 </html>
