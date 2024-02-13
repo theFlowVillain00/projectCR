@@ -16,16 +16,12 @@
             exit();
 
         }else{
-            
-            
-
-            echo "<p>Benvenuto, " . $_SESSION["username"] . "!</p>";
+        
+            echo "<p>Benvenuto, " . $_SESSION["utente"]["username"] . "!</p>";
             echo "<form action='function/logout.php' method='post'>
                     <button type='submit'>Logout</button>
-                </form>";
+                 </form>";
         }
-
-
         
     ?>
 
