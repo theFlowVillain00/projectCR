@@ -1,0 +1,23 @@
+body{
+    background-color:#393939;
+}
+
+.navigation-panel{
+    background-color:#292929;
+    position: fixed;
+    height: 40px;
+    width:100%;
+    display:flex;
+}
+
+#search-p{
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+#msg-p{
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}

@@ -1,0 +1,57 @@
+
+Miniere:
+    Oro
+    Carbone
+    Ferro
+    Rame
+    Alluminio
+    Zinco
+    Nichel
+    Piombo
+    Uranio
+
+Agro manifattura:
+    Grano
+    Verdura
+    Frutta
+    Cereali
+    Mucche (Carne rossa)
+    Polli (carne bianca)
+
+
+DA DIPENDETE:
+    Il dipendente, riscuote solamente il salario ogni volta che lavora nella fabbrica.
+        Esso potrà quindi lavorare per l'azienda, tuttavia la durata del lavoro cambierà
+    a seconda della fabbrica, quindi non sarà un click e via, ma bensì il lavoro avrà
+    una durata di tempo ben definita.
+
+DA PROPRIETARIO:
+    Il propretario, paga il dipendente e riceve in cambio i materiali/prodotti di prima mano che il 
+    dipendente ha ricavato durante il lavoro.
+        Il propretario della fabbrica può scegliere tra le seguenti impostazioni di pagamento
+    della fabbrica:
+        -Salariato => Il propretario pagherà il 100% del lavoro del dipendente con i soldi.
+        -Decima =>  Il propretario pegherà il 90% del lavoro del dipendente con i soldi il 10% in beni.
+
+    
+TIPI DI FABBRRICHE:
+    Pubblica => Lo stato paga i dipendenti, i dipendenti lavorano per lo stato.
+    Privato  => Il proprietario dell'azienda paga i dipendenti, i dipendenti lavorano per il proprietario.
+
+LIVELLO DELLE FABBRICHE:
+    Il livello della fabbrica partirà da 2, fino ad arrivare a 200.
+    Il livello influenzerà in modo significativo la produzione della fabbrica.
+    Per aumentare il livello si dovrà raggiungere un numero di esperienza che aumenterà
+    gradualmente ogni volta che si lavora.
+
+    Formula di progressione:
+    Esperienza necessaria per il livello = livelloFabbrica-1 * livelloFabbrica^2
+
+    A livello pratico:
+    Da 2 a 3 => (2-1) * 2^2
+    da 3 a 4 => (3-1) * 3^2
+    da 4 a 5 => (4-1) * 4^2
+
+
+
+FORMULE:

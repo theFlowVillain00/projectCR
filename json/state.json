@@ -1,0 +1,17 @@
+{
+    "stato": {
+      "nome": "Repubblica Italiana",
+      "colore": "rosso",
+      "abitanti": 160,
+      "forma_di_governo": "Repubblica presidenziale",
+      "capitale": "Roma",
+      "lingua": "Italiano",
+      "moneta": "Euro",
+      "ministro": {
+        "nome": "Compagno Lenin",
+        "titolo": "Primo Ministro",
+        "partito": "Partito Internazionalista"
+      }
+    }
+  }
+  
