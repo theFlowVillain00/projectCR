@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/log-reg.css">
     <meta name="google-signin-client_id" content="578898538060-gcjikar14vkhigmscno3lkfttsudprhi.apps.googleusercontent.com">
-    <title>Login</title>
+    <title>Community Regions - Login</title>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
