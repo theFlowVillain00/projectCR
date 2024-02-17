@@ -30,7 +30,6 @@
     }
 
     function registrati(){
-<<<<<<< HEAD
         
         //Controllo se gli input siano settati
         if(isset($_POST["username"]) && isset($_POST["password"]) 
@@ -59,11 +58,6 @@
             return false;
      }
  }
-=======
-
-        
-    }
->>>>>>> d46d4dd9dd89ad5f3255218dbf28bfb9d054d994
 
     function controllaSessione(){
         
