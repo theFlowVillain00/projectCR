@@ -4,12 +4,8 @@ Miniere:
     Carbone
     Ferro
     Rame
-    Alluminio
-    Zinco
-    Nichel
-    Piombo
-    Uranio
-
+    Petrolio
+    
 Agro manifattura:
     Grano
     Verdura
@@ -18,6 +14,7 @@ Agro manifattura:
     Mucche (Carne rossa)
     Polli (carne bianca)
 
+ 
 
 DA DIPENDETE:
     Il dipendente, riscuote solamente il salario ogni volta che lavora nella fabbrica.

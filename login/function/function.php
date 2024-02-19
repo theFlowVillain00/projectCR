@@ -1,5 +1,18 @@
 <?php
 
+    // Leggi il contenuto del file JSON nel tuo "database"
+    $databaseFile = '../../mainpages/database/user.json';
+    $database = json_decode(file_get_contents($databaseFile), true);
+
+    // Funzione per aggiungere un nuovo record al "database"
+    function aggiungiRecord($nuovoRecord) {
+        global $database;
+        $database[] = $nuovoRecord;
+        // Scrivi il "database" aggiornato nel file JSON
+        file_put_contents('user.json', json_encode($database, JSON_PRETTY_PRINT));
+    }
+
+
     function controllaLogin($utenti){
 
         if(isset($_POST["username"]) && isset($_POST["password"])){
@@ -43,6 +56,19 @@
             $email = $_POST["email"];
             $name = $_POST["name"];
             
+            //Valori in più non definibili durante il login
+            $nuovoRecord = array(
+                "username" => $username,
+                "password" => $password,
+                "email" => $email,
+                "name" => $name,
+                "photo" => "black.png",
+                "premium" => false,
+                "states" => "a",
+            );
+
+            aggiungiRecord($nuovoRecord);
+
             // Memorizza i dati dell'utente nella sessione
             $_SESSION["utente"] = array(
                 "username" => $username,
